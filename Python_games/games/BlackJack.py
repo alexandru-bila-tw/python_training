@@ -28,7 +28,7 @@ class BlackJack:
             player_forfeit = False
 
             while True:
-                player_score = sum(card.value for card in player_cards)
+                player_score = self.calculate_score(player_cards)
 
                 print('\n' + 'You can see the dealer has the card:'.center(55) + f'\n{cpu_cards[0]}\n' + 'You have:'.center(55))
                 for card in player_cards:
@@ -85,3 +85,14 @@ class BlackJack:
                 print('Thanks for playing, Bye!'.center(55))
 
 
+    def calculate_score(self, hand):
+        score = sum(card.value for card in hand)
+
+        # Count how many Aces are in the current hand
+        aces = sum(1 for card in hand if 'Ace' in str(card) or (hasattr(card, 'rank') and card.rank == 'Ace'))
+
+        while score > 21 and aces > 0:
+            score -= 10
+            aces -= 1
+
+        return score
