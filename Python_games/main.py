@@ -1,5 +1,4 @@
-from games.BlackJack import BlackJack
-from games.War import War
+from games import *
 
 if __name__ == '__main__':
     game_title = input('What game do you want to play? (war,blackjack) ').strip().lower()

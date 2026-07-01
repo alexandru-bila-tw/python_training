@@ -1,6 +1,4 @@
-from components.Deck import Deck
-from components.Player import Player
-
+from components import *
 
 class BlackJack:
     def __init__(self,name):

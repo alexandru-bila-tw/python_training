@@ -1,5 +1,5 @@
 import random
-from components.Card import Card, suits
+from components import Card, suits
 
 CARD_VALUES = {
     'standard': {

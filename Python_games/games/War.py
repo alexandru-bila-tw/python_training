@@ -1,8 +1,4 @@
-from time import sleep
-
-from components.Deck import Deck
-from components.Player import Player
-
+from components import *
 
 class War:
     def __init__(self,name1='Jack Daniel',name2 = 'Allen Walker'):
