@@ -65,7 +65,6 @@ class BlackJack:
                     print(str(card).center(55))
                 print(f'Dealer final score: {cpu_score}'.center(55))
 
-                # --- DETERMINE WINNER ---
                 if cpu_score > 21:
                     print('🎉 Dealer busted! You win! 🎉'.center(55))
                 elif player_score > cpu_score:
@@ -88,8 +87,7 @@ class BlackJack:
     def calculate_score(self, hand):
         score = sum(card.value for card in hand)
 
-        # Count how many Aces are in the current hand
-        aces = sum(1 for card in hand if 'Ace' in str(card) or (hasattr(card, 'rank') and card.rank == 'Ace'))
+        aces = sum(1 for card in hand if card.rank == 'Ace')
 
         while score > 21 and aces > 0:
             score -= 10
