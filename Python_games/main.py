@@ -9,4 +9,4 @@ if __name__ == '__main__':
         game.start_game()
     elif game_title == 'blackjack':
         game = BlackJack()
-        # game.start_game()
+        game.start_game()
