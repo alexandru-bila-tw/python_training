@@ -1,8 +1,22 @@
 from components import *
 
 class BlackJack:
-    def __init__(self,name):
-        self.player=Player(name)
+    def __init__(self):
+        while True:
+            try:
+                num_players = int(input("Enter number of players (1-4): ".rjust(55//2)))
+                if 1 <= num_players <= 4:
+                    break
+                print("Please enter a number between 1 and 4.".center(55))
+            except ValueError:
+                print("Invalid input. Please enter a number.".center(55))
+        self.players = []
+        for i in range(num_players):
+            name = input(f"Enter name for Player {i+1}: ".rjust(55//2)).strip()
+            if not name:
+                name = f"Player {i+1}"
+            self.players.append(Player(name))
+
         self.deck = Deck('blackjack')
         print(('The deck starts with '+ str(len(self.deck.all_cards)) + ' cards').center(55))
         self.deck.shuffle()
@@ -34,7 +48,7 @@ class BlackJack:
                     player_score = self.calculate_score(current_hand)
 
                     if len(player_hands) > 1:
-                        print(f'\n--- PLAYING HAND {hand_idx + 1} OF {len(player_hands)} ---'.center(55))
+                        print(f'--- PLAYING HAND {hand_idx + 1} OF {len(player_hands)} ---'.center(55))
 
                     print('\n' + 'You can see the dealer has the card:'.center(55) + f'\n{cpu_cards[0]}\n' + 'You have:'.center(55))
                     for card in current_hand:
@@ -58,7 +72,7 @@ class BlackJack:
 
                     if choice in ['H', 'HIT']:
                         current_hand.append(self.deck.deal_one())
-                    elif choice in ['S', 'STAND', 'PLAY']:
+                    elif choice in ['S', 'STAND']:
                         hand_statuses.append('stand')
                         break
                     elif choice in ['F', 'FORFEIT']:

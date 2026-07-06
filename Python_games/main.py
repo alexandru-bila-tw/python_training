@@ -8,6 +8,5 @@ if __name__ == '__main__':
         game = War(player1,player2)
         game.start_game()
     elif game_title == 'blackjack':
-        player = input('Username :')
-        game = BlackJack(player)
-        game.start_game()
+        game = BlackJack()
+        # game.start_game()
