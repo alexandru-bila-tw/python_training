@@ -20,14 +20,14 @@ class Field:
                 if serpent_char:
                     row_chars.append(serpent_char)
                 elif food_coord and (x, y) == food_coord:
-                    row_chars.append('🧇 ')
+                    row_chars.append('🥚 ')
 
                 else:
-                    row_chars.append(".  ")
+                    row_chars.append(" . ")
 
             board_rows.append("   ".join(row_chars))
 
-        border = "+" + "-" * (self.max_x * 2 - 1) + "+"
+        border = "+ " + " - " * (self.max_x * 2 - 1) + " +"
 
         print(border)
         for row in board_rows:

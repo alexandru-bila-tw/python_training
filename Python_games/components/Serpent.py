@@ -25,7 +25,7 @@ class Serpent:
             return self.body_skin
         return None
 
-    def move(self):
+    def move(self,grow = False):
         #head_x,head_y
         hx, hy = self.head
         new_head = None
@@ -37,7 +37,8 @@ class Serpent:
 
         self.coordinates.insert(0, new_head)
 
-        self.coordinates.pop()
+        if not grow:
+            self.coordinates.pop()
 
     def change_direction(self, key):
         key_mapping = {
@@ -48,11 +49,10 @@ class Serpent:
         }
 
         if key not in key_mapping:
-            return  # Ignore irrelevant keys
+            return
 
         new_dir = key_mapping[key]
 
-        # Block immediate 180-degree turnabouts
         if (new_dir == 'UP' and self.direction == 'DOWN') or \
                 (new_dir == 'DOWN' and self.direction == 'UP') or \
                 (new_dir == 'LEFT' and self.direction == 'RIGHT') or \
