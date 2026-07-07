@@ -38,3 +38,25 @@ class Serpent:
         self.coordinates.insert(0, new_head)
 
         self.coordinates.pop()
+
+    def change_direction(self, key):
+        key_mapping = {
+            'w': 'UP',
+            's': 'DOWN',
+            'a': 'LEFT',
+            'd': 'RIGHT'
+        }
+
+        if key not in key_mapping:
+            return  # Ignore irrelevant keys
+
+        new_dir = key_mapping[key]
+
+        # Block immediate 180-degree turnabouts
+        if (new_dir == 'UP' and self.direction == 'DOWN') or \
+                (new_dir == 'DOWN' and self.direction == 'UP') or \
+                (new_dir == 'LEFT' and self.direction == 'RIGHT') or \
+                (new_dir == 'RIGHT' and self.direction == 'LEFT'):
+            return
+
+        self.direction = new_dir
