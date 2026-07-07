@@ -3,6 +3,9 @@ class Serpent:
         self.coordinates = [(0, 1), (0, 0)]
         self.direction = "RIGHT"
 
+        self.head_skin = '🐸 '
+        self.body_skin = '🤌 '
+
     @property
     def head(self):
         return self.coordinates[0]
@@ -14,6 +17,13 @@ class Serpent:
     @property
     def body(self):
         return self.coordinates[1:]
+
+    def get_character_at(self, x, y):
+        if (x, y) == self.head:
+            return self.head_skin
+        elif (x, y) in self.body:
+            return self.body_skin
+        return None
 
     def move(self):
         #head_x,head_y

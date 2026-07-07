@@ -15,17 +15,15 @@ class Field:
             row_chars = []
             for x in range(self.max_x):
 
-                if (x, y) == serpent.head:
-                    row_chars.append('🐸')
+                serpent_char = serpent.get_character_at(x, y)
 
-                elif (x, y) in serpent.body:
-                    row_chars.append('🤌')
-
+                if serpent_char:
+                    row_chars.append(serpent_char)
                 elif food_coord and (x, y) == food_coord:
-                    row_chars.append('🧇')
+                    row_chars.append('🧇 ')
 
                 else:
-                    row_chars.append(".")
+                    row_chars.append(".  ")
 
             board_rows.append("   ".join(row_chars))
 
