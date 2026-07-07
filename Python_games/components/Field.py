@@ -1,3 +1,9 @@
+import os
+
+def clear_screen():
+    #In intelij need edit configuration-> modify options -> emulate the terminal in output console
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 class Field:
     def __init__(self,max_x,max_y):
         self.max_x = max_x

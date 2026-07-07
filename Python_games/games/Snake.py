@@ -1,5 +1,6 @@
-import os,time
+import time
 from components import Serpent, Field
+from components.Field import clear_screen
 
 class Snake:
     def __init__(self, size_field):
@@ -10,9 +11,9 @@ class Snake:
         serpent = Serpent()
 
         for _ in range(self.field.max_x):
-            os.system('cls||clear')
+            clear_screen()
 
-            self.field.render(serpent)
+            self.field.render(serpent,(2,2))
 
             serpent.move()
 
