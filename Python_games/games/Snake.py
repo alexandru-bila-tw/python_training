@@ -51,15 +51,32 @@ def spawn_food(field, serpent):
         if food_pos not in serpent.coordinates:
             return food_pos
 
+def pass_through_wall(field,serpent):
+    hx, hy = serpent.head
+    try:
+        match True:
+            case _ if hx < 0:
+                hx = field.max_x - 1
+            case _ if hx >= field.max_x :
+                hx = 0
+            case _ if hy < 0:
+                hy = field.max_y -1
+            case _ if hy >= field.max_y:
+                hy = 0
+    finally:
+        new_head = (hx,hy)
+        serpent.warp(new_head)
+
+
 class Snake:
     def __init__(self, max_x,max_y):
         self.field = Field(max_x,max_y)
-        self.snake = Serpent()
+        self.serpent = Serpent()
 
     def render_field(self):
         make_stdin_non_blocking()
 
-        food_pos = spawn_food(self.field, self.snake)
+        food_pos = spawn_food(self.field, self.serpent)
         score = 0
 
         try:
@@ -67,29 +84,36 @@ class Snake:
             while not is_game_over:
                 key = get_keypress()
                 if key:
-                    self.snake.change_direction(key)
+                    self.serpent.change_direction(key)
 
-                ate_food = (self.snake.head == food_pos)
+                ate_food = (self.serpent.head == food_pos)
 
-                self.snake.move(ate_food)
+                self.serpent.move(ate_food)
 
                 if ate_food:
                     score += 1
-                    food_pos = spawn_food(self.field, self.snake)
+                    food_pos = spawn_food(self.field, self.serpent)
 
-                hx, hy = self.snake.head
+                hx, hy = self.serpent.head
+
+                #TODO: Make a option for walls, no walls and random walls on field.
+                # if hx < 0 or hx >= self.field.max_x or hy < 0 or hy >= self.field.max_y:
+                #     print("💥 CRASH! You hit the wall!")
+                #     is_game_over = True
+                #     break
+
                 if hx < 0 or hx >= self.field.max_x or hy < 0 or hy >= self.field.max_y:
-                    print("💥 CRASH! You hit the wall!")
+                    pass_through_wall(self.field,self.serpent)
+
+                if self.serpent.head in self.serpent.body:
+                    print(f"💀 OUCH! You bit your own tail! Your score was: {score}")
                     is_game_over = True
                     break
 
-                if self.snake.head in self.snake.body:
-                    print("💀 OUCH! You bit your own tail!")
-                    is_game_over = True
-                    break
+
 
                 clear_screen()
-                self.field.render(self.snake, food_pos)
+                self.field.render(self.serpent, food_pos)
 
                 time.sleep(0.5)
 

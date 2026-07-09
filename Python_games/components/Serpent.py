@@ -60,3 +60,7 @@ class Serpent:
             return
 
         self.direction = new_dir
+
+    def warp(self, new_head):
+        self.coordinates.insert(0, new_head)
+        self.coordinates.pop()
